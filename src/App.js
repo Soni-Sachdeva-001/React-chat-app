@@ -1,26 +1,35 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Typography from '@material-ui/core/Typography';
+import useTodoState from "./components/useMessageState";
+import AddMessage from "./components/addMessage/AddMessage";
+import ViewMessages from "./components/viewMessage/ViewMessages";
+import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+    const { messages, addMessages, deleteMessages } = useTodoState([]);
+
+    return (
+        <Grid container justify={'center'} alignItems={'center'} direction={'column'}>
+            <Typography component="h5" variant="h4">
+                Chat Box
+            </Typography>
+            <Box mt={4} >
+                <AddMessage
+                    saveTodo={messageText => {
+                        const trimmedText = messageText.trim();
+
+                        if (trimmedText.length > 0) {
+                            addMessages(trimmedText);
+                        }
+                    }}
+                />
+            </Box>
+            <Box mt={2}>
+            <ViewMessages messages={messages} deleteMessages={deleteMessages} />
+            </Box>
+        </Grid>
+    );
+};
 
 export default App;
