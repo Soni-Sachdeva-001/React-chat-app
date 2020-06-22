@@ -4,10 +4,21 @@ import useInputState from '../stateManagement/useInputState';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-import './AddMessage.css';
+import styled from "styled-components";
 
 const AddMessage = ({ saveTodo }) => {
   const { value, reset, onChange } = useInputState();
+
+  const Button = styled.button`
+     variant: contained;
+     background-color:darkblue;
+     color:white;
+     font-size: 1em;
+     margin-left: 5em;
+     margin-top: 2em;
+     padding: 0.25em 1em;
+     border: none;
+` ;
 
   return (
       <Grid container direction={'column'} justify={'center'} alignItems={'center'}>
@@ -29,11 +40,9 @@ const AddMessage = ({ saveTodo }) => {
               />
             </Box>
 
-            <Box mt={3} ml={9}>
+            <Box >
               <Button
                   type={'submit'}
-                  variant={'contained'}
-                  id={'send-button'}
               >
                   Send
               </Button>
